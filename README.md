@@ -5,6 +5,6 @@
 # Docs
 
 - python 3.12
-- each job has its own separate folder
+- ado jobs go to ado folder
 - venv folder holds virtual env for python 
 - start_venv.bat starts virtual environment and keeps cmd window open
