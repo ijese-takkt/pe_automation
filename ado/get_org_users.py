@@ -96,6 +96,10 @@ for item in data.get('items', []):
 # --- RESULTS ---
 print(f"::notice::Scan Complete. Found {len(all_users)} total users.")
 
+# Sort by Days Inactive (descending)
+all_users_sorted = sorted(all_users, key=lambda u: u["Days Inactive"], reverse=True)
+
+
 # --- WRITE CSV ---
 output_path = BASE_DIR / "outputs" / ADO_ORG  # outputs/<ORG> next to the script
 output_path.mkdir(parents=True, exist_ok=True)
@@ -116,6 +120,6 @@ fieldnames = [
 with csv_file.open("w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     writer.writeheader()
-    writer.writerows(all_users)
+    writer.writerows(all_users_sorted)
 
 print(f"::notice::Written {len(all_users)} users to {csv_file}")
