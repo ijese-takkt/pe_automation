@@ -1,0 +1,46 @@
+name: Get ADO users for KKEU
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan-users:
+    runs-on: ubuntu-latest
+
+    env:
+      ADO_ORG: KKEU                    # hardcoded org
+      ADO_PAT: ${{ secrets.ADO_PAT }}  # single PAT secret in repo settings
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run scan script
+        run: |
+          python ado/get_org_users.py
+
+      - name: Commit and push CSV if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git add outputs/
+          git commit -m "chore: update ADO users CSV for ${ADO_ORG}"
+          git push
