@@ -41,6 +41,6 @@ jobs:
             exit 0
           fi
 
-          git add outputs/
+          git add ado/outputs/
           git commit -m "chore: update ADO users CSV for ${ADO_ORG}"
           git push
