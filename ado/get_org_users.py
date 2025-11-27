@@ -23,21 +23,30 @@ headers = {
 }
 
 # --- HELPER: Date Math ---
-def calculate_inactive_days(last_access_str):
-    """
-    Converts ADO timestamp (e.g., '2023-10-01T12:00:00Z') to days inactive.
-    Returns 9999 if user never logged in.
-    """
-    if not last_access_str:
-        return 9999
-    
-    # Parse the timestamp (replacing Z with +00:00 to make it timezone-aware)
-    last_login_dt = datetime.fromisoformat(last_access_str.replace('Z', '+00:00'))
-    
-    # Calculate difference between NOW (aware) and LOGIN (aware)
-    now = datetime.now(last_login_dt.tzinfo)
-    delta = now - last_login_dt
-    return delta.days
+def calculate_inactive_days(last_access_str, created_str):
+    # Parse ignoring the bogus 0001-01-01 date
+    def parse_dt(s):
+        if not s or s.startswith("0001-01-01"):
+            return None
+        return datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+    last_dt = parse_dt(last_access_str)
+    created_dt = parse_dt(created_str)
+
+    # Use whichever is newer
+    if last_dt and created_dt:
+        ref_dt = max(last_dt, created_dt)
+    else:
+        ref_dt = last_dt or created_dt
+
+    # With your data, this should never happen anymore
+    if not ref_dt:
+        # fallback just in case Microsoft invents another surprise
+        return 0
+
+    now = datetime.now(ref_dt.tzinfo)
+    return (now - ref_dt).days
+
 
 print("\n--- Scanning Users ---")
 
@@ -71,14 +80,17 @@ for item in data.get('items', []):
     license_type = access.get('licenseDisplayName')
     license_source = access.get('licensingSource') # 'account' vs 'msdn'
     last_login_raw = item.get('lastAccessedDate')    
-    
+    created_raw    = item.get("dateCreated")        # entitlement creation
+
     all_users.append({
         'Email': email,
         'License': license_type,
         'Source': license_source,
         'Last Login': last_login_raw,
+        'Created': created_raw,
         'Last Login Date': last_login_raw.split('T')[0] if last_login_raw else '',
-        'Days Inactive': calculate_inactive_days(last_login_raw)
+        'Created Date': created_raw.split('T')[0] if created_raw else '',
+        'Days Inactive': calculate_inactive_days(last_login_raw, created_raw)
     })
 
 # --- RESULTS ---
@@ -95,7 +107,9 @@ fieldnames = [
     "License",
     "Source",
     "Last Login",
+    "Created",
     "Last Login Date",
+    "Created Date",
     "Days Inactive",
 ]
 
