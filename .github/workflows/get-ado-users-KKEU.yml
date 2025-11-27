@@ -48,3 +48,5 @@ jobs:
           git add ado/outputs/
           git commit -m "chore: update ADO users CSV for ${ADO_ORG}"
           git push
+          
+          echo "::notice::Committed and pushed updated CSV for ${ADO_ORG}."

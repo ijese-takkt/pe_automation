@@ -50,8 +50,17 @@ all_users = []
 
 res = requests.get(url_users, headers=headers)
 data = res.json()
-print("totalCount:", data.get("totalCount"))
-print("items on this page:", len(data.get("items", [])))
+
+total = data.get("totalCount") or 0
+items_count = len(data.get("items", []))
+
+print(f"totalCount from API: {total}")
+print(f"items on this page: {items_count}")
+
+if total != items_count:
+    print(f"::error::Mismatch between totalCount ({total}) and items on this page ({items_count}) – expected them to match with top=30000")
+else:
+    print("::notice::User entitlement counts match totalCount and items")
     
 # Loop through the items in this page
 for item in data.get('items', []):
@@ -73,7 +82,7 @@ for item in data.get('items', []):
     })
 
 # --- RESULTS ---
-print(f"\n✅ Scan Complete. Found {len(all_users)} total users.")
+print(f"::notice::Scan Complete. Found {len(all_users)} total users.")
 
 # --- WRITE CSV ---
 output_path = BASE_DIR / "outputs" / ADO_ORG  # outputs/<ORG> next to the script
@@ -95,4 +104,4 @@ with csv_file.open("w", newline="", encoding="utf-8") as f:
     writer.writeheader()
     writer.writerows(all_users)
 
-print(f"✅ Written {len(all_users)} users to {csv_file}")
+print(f"::notice::Written {len(all_users)} users to {csv_file}")
