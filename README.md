@@ -13,6 +13,8 @@ Scripts and jobs for **Platform Engineering** automation.
 ## Local Development
 
 * these are not in repo but you need them or equivalents to develop/test locally
+* you probably want to create venv then activate it to work from there
+    * venv needs to be OUTSIDE the repo, e.g. in its parent folder
 * `venv/` holds the local Python virtual environment
 * `start_venv.bat` activates the venv and keeps the cmd window open
 * For local development, set `ADO_ORG` and `ADO_PAT` via a **.bat / shell script outside the repo**
@@ -69,4 +71,4 @@ Scripts and jobs for **Platform Engineering** automation.
     * For `KKEU`: `ado/outputs/KKEU/users_latest.csv`
   * Days Inactive: is calculated from Last Login OR Created (whichever is newer) to today
     * This is because if user never logged in then Last Login is 01-01-0001
-    
+
