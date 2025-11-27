@@ -2,7 +2,6 @@
 
 Scripts and jobs for **Platform Engineering** automation.
 
----
 
 ## General
 
@@ -19,7 +18,6 @@ Scripts and jobs for **Platform Engineering** automation.
 * For local development, set `ADO_ORG` and `ADO_PAT` via a **.bat / shell script outside the repo**
   (to avoid committing PATs in plaintext)
 
----
 
 ## Secrets (GitHub)
 
@@ -30,7 +28,6 @@ Scripts and jobs for **Platform Engineering** automation.
 
 > In the workflow we hardcode `ADO_ORG` to `KKEU` and read `ADO_PAT` from this secret.
 
----
 
 ## GitHub Actions
 
@@ -42,7 +39,6 @@ Scripts and jobs for **Platform Engineering** automation.
 * If `ado/outputs/KKEU/users_latest.csv` changed, commits and pushes it back to the repo
 * GitHub’s UI can display the CSV directly (no download needed)
 
----
 
 ## Scripts
 
