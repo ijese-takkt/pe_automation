@@ -5,6 +5,7 @@ from datetime import datetime
 import csv
 from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent  # folder where this script lives
 
 # --- CONFIG ---
 ADO_ORG = os.getenv("ADO_ORG")
@@ -75,7 +76,7 @@ for item in data.get('items', []):
 print(f"\n✅ Scan Complete. Found {len(all_users)} total users.")
 
 # --- WRITE CSV ---
-output_path = Path("outputs") / ADO_ORG
+output_path = BASE_DIR / "outputs" / ADO_ORG  # outputs/<ORG> next to the script
 output_path.mkdir(parents=True, exist_ok=True)
 
 csv_file = output_path / f"users_latest.csv"
