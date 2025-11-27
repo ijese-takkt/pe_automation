@@ -2,17 +2,20 @@ import requests
 import base64
 import os
 from datetime import datetime
+import csv
+from pathlib import Path
+
 
 # --- CONFIG ---
-ORG_URL = os.getenv("ADO_ORG_URL")
-PAT = os.getenv("ADO_PAT")
+ADO_ORG = os.getenv("ADO_ORG")
+ADO_PAT = os.getenv("ADO_PAT")
 
-if not ORG_URL or not PAT:
+if not ADO_ORG or not ADO_PAT:
     print("❌ Error: Environment variables ADO_ORG_URL or ADO_PAT are missing.")
     exit(1)
 
 # --- AUTH ---
-encoded_pat = base64.b64encode(f":{PAT}".encode()).decode()
+encoded_pat = base64.b64encode(f":{ADO_PAT}".encode()).decode()
 headers = {
     'Authorization': f'Basic {encoded_pat}',
     'Content-Type': 'application/json'
@@ -39,9 +42,9 @@ print("\n--- Scanning Users ---")
 
 # API: User Entitlements (Contains License + Login Data)
 # LICENSING DOMAIN: Change 'dev.azure.com' to 'vsaex.dev.azure.com'
-licensing_org_url = ORG_URL.replace("dev.azure.com", "vsaex.dev.azure.com")
-url_users = f"{licensing_org_url}/_apis/userentitlements?top=30000&api-version=7.1-preview.2"
-print(url_users)
+LICENSING_ORG_URL = f"https://vsaex.dev.azure.com/{ADO_ORG}"
+
+url_users = f"{LICENSING_ORG_URL}/_apis/userentitlements?top=30000&api-version=7.1-preview.2"
 all_users = []
 
 res = requests.get(url_users, headers=headers)
@@ -64,18 +67,31 @@ for item in data.get('items', []):
         'License': license_type,
         'Source': license_source,
         'Last Login': last_login_raw,
+        'Last Login Date': last_login_raw.split('T')[0] if last_login_raw else '',
         'Days Inactive': calculate_inactive_days(last_login_raw)
     })
-
-from collections import Counter
-
-source_counts = Counter(u.get("Source") for u in all_users)
-print(source_counts)
-
 
 # --- RESULTS ---
 print(f"\n✅ Scan Complete. Found {len(all_users)} total users.")
 
-# Print top 1 for preview
-for u in all_users[:20]:
-    print(u)
+# --- WRITE CSV ---
+output_path = Path("outputs") / ADO_ORG
+output_path.mkdir(parents=True, exist_ok=True)
+
+csv_file = output_path / f"users_latest.csv"
+
+fieldnames = [
+    "Email",
+    "License",
+    "Source",
+    "Last Login",
+    "Last Login Date",
+    "Days Inactive",
+]
+
+with csv_file.open("w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(all_users)
+
+print(f"✅ Written {len(all_users)} users to {csv_file}")
