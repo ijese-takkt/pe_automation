@@ -63,7 +63,10 @@ Scripts and jobs for **Platform Engineering** automation.
 
   * Creates CSV with:
 
-    * `Email`, `License`, `Source`, `Last Login`, `Last Login Date`, `Days Inactive`
+    * `Email`, `License`, `Source`, `Last Login`, `Created`, `Last Login Date`, `Created Date`, `Days Inactive`
   * Path: `ado/outputs/<ORG>/users_latest.csv`
 
     * For `KKEU`: `ado/outputs/KKEU/users_latest.csv`
+  * Days Inactive: is calculated from Last Login OR Created (whichever is newer) to today
+    * This is because if user never logged in then Last Login is 01-01-0001
+    
