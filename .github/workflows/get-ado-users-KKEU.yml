@@ -3,8 +3,12 @@ name: Get ADO users for KKEU
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+
 jobs:
-  scan-users:
+  get-org-users:
     runs-on: ubuntu-latest
 
     env:
