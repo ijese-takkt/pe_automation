@@ -1,5 +1,5 @@
 Email,License,Source,Last Login,Created,Last Login Date,Created Date,Days Inactive
-a.bilikj@axm365.com,Basic,account,0001-01-01T00:00:00Z,2025-09-24T09:49:54.2411505Z,0001-01-01,2025-09-24,63
+a.bilikj@axm365.com,Basic,account,0001-01-01T00:00:00Z,2025-09-24T09:49:54.2411505Z,0001-01-01,2025-09-24,64
 AaronS@nbf.com,Stakeholder,account,2025-11-20T13:59:10.7525062Z,2025-10-18T21:02:24.8404648Z,2025-11-20,2025-10-18,6
 aaron.fox@towa.at,Stakeholder,account,0001-01-01T00:00:00Z,2025-07-17T13:51:44.0950019Z,0001-01-01,2025-07-17,132
 ali.abdi@takkt.com,Basic,account,2025-11-26T08:37:08.1258084Z,2025-02-05T12:23:01.0742137Z,2025-11-26,2025-02-05,1
@@ -24,7 +24,7 @@ AllyA@nbf.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-10-18T21:01:57.49783
 muhamed.al-najar@takkt.com,Stakeholder,account,2025-11-26T08:50:51.0209623Z,2025-03-13T12:54:34.2877397Z,2025-11-26,2025-03-13,1
 AEH@takktfoodservices.com,Basic,account,2025-08-22T16:11:44.7768142Z,2025-06-30T13:11:00.0777666Z,2025-08-22,2025-06-30,96
 Amrendra.Singh3@encora.com,Basic,account,2025-11-27T04:47:46.1733721Z,2025-04-25T05:57:55.3312269Z,2025-11-27,2025-04-25,0
-ana.bilikj@axaptamasters.com,Visual Studio Enterprise subscription,msdn,2025-11-26T09:54:19.4318833Z,2025-05-28T07:31:40.9554551Z,2025-11-26,2025-05-28,0
+ana.bilikj@axaptamasters.com,Visual Studio Enterprise subscription,msdn,2025-11-26T09:54:19.4318833Z,2025-05-28T07:31:40.9554551Z,2025-11-26,2025-05-28,1
 irlantis.anastasiadis@takkt.com,Stakeholder,account,2025-11-25T02:01:25.1953556Z,2025-04-04T08:19:06.9989649Z,2025-11-25,2025-04-04,2
 annika.andersson@takkt.com,Stakeholder,account,2025-11-19T10:55:05.7696624Z,2025-11-07T17:10:18.2955605Z,2025-11-19,2025-11-07,7
 andhe.santosh@infosys.com,Basic,account,2025-10-15T09:09:47.952918Z,2025-02-27T14:00:50.8335839Z,2025-10-15,2025-02-27,43
@@ -64,11 +64,11 @@ fabian.baumhauer@takkt.com,Stakeholder,account,2025-11-25T07:39:38.0164062Z,2025
 normen.bayok@takkt.com,Basic,account,2025-11-26T13:32:20.8171997Z,2024-04-04T14:49:05.8399146Z,2025-11-26,2024-04-04,0
 beckym@nbf.com,Stakeholder,account,2025-11-19T21:49:51.2665625Z,2025-10-29T13:41:22.4170667Z,2025-11-19,2025-10-29,7
 tibor.beda@takkt.com,Basic,account,2025-11-24T09:41:00.9639235Z,2025-11-24T09:38:47.7984645Z,2025-11-24,2025-11-24,3
-goezde.belik@takkt.com,Stakeholder,account,2025-11-10T10:05:25.2752393Z,2025-06-04T18:57:30.9479353Z,2025-11-10,2025-06-04,16
+goezde.belik@takkt.com,Stakeholder,account,2025-11-10T10:05:25.2752393Z,2025-06-04T18:57:30.9479353Z,2025-11-10,2025-06-04,17
 sabine.bellio@takkt.com,Basic,account,0001-01-01T00:00:00Z,2025-11-17T09:12:38.6077556Z,0001-01-01,2025-11-17,10
-alexandra.berg@kaiserkraft.com,Stakeholder,account,2025-10-23T10:05:25.227606Z,2025-08-04T09:37:09.5513941Z,2025-10-23,2025-08-04,34
+alexandra.berg@kaiserkraft.com,Stakeholder,account,2025-10-23T10:05:25.227606Z,2025-08-04T09:37:09.5513941Z,2025-10-23,2025-08-04,35
 berger@isonicpro.com,Visual Studio Professional subscription,msdn,2025-03-28T07:19:45.2671866Z,2024-11-25T10:59:45.813278Z,2025-03-28,2024-11-25,244
-alexander.bergstroem_extern@takkt.com,Stakeholder,account,2025-11-18T10:01:11.5260199Z,2025-05-28T08:08:00.9240809Z,2025-11-18,2025-05-28,8
+alexander.bergstroem_extern@takkt.com,Stakeholder,account,2025-11-18T10:01:11.5260199Z,2025-05-28T08:08:00.9240809Z,2025-11-18,2025-05-28,9
 BetsyR@nbf.com,Stakeholder,account,2025-11-26T14:42:12.3421673Z,2025-10-18T20:07:06.7474956Z,2025-11-26,2025-10-18,0
 Bhashkar.Karagthiya@encora.com,Basic,account,2025-11-26T06:11:01.6901331Z,2025-04-22T13:37:26.1779787Z,2025-11-26,2025-04-22,1
 Bhaumik@ad.takktfoodservices.com,Basic,account,2025-11-18T13:49:01.9390189Z,2025-10-28T16:30:23.4973668Z,2025-11-18,2025-10-28,8
@@ -174,11 +174,11 @@ christina.eckmueller@takkt.com,Visual Studio Professional subscription,msdn,2025
 eduardo.borges@d2ggroup.com,MSDN Platforms,msdn,2025-08-19T13:04:50.7105246Z,2025-07-31T06:25:22.6632756Z,2025-08-19,2025-07-31,99
 markus.egdmann@takkt.com,Basic,account,2025-10-16T13:07:28.982542Z,2019-09-03T09:09:12.2193144Z,2025-10-16,2019-09-03,41
 timo.egeler@takkt.com,Stakeholder,account,2025-11-26T08:22:35.5059468Z,2025-02-12T09:34:50.6441918Z,2025-11-26,2025-02-12,1
-corinna.eichler@takkt.com,Stakeholder,account,2025-11-26T10:03:09.3734823Z,2025-03-28T12:09:06.5058887Z,2025-11-26,2025-03-28,0
+corinna.eichler@takkt.com,Stakeholder,account,2025-11-26T10:03:09.3734823Z,2025-03-28T12:09:06.5058887Z,2025-11-26,2025-03-28,1
 orhan.eken@takkt.com,Basic,account,2025-11-27T01:56:27.7104351Z,2023-05-04T07:59:27.691969Z,2025-11-27,2023-05-04,0
 ramy.hakam@takkt.com,Basic,account,2025-06-26T08:37:12.9798531Z,2025-02-06T09:53:59.0309163Z,2025-06-26,2025-02-06,154
 eric.cruz@d2ggroup.com,Visual Studio Professional subscription,msdn,2025-11-12T16:51:21.0744476Z,2025-11-06T15:30:20.4204377Z,2025-11-12,2025-11-06,14
-dominik.ermler@kaiserkraft.com,Basic,account,2025-11-21T09:58:55.6098568Z,2025-05-28T09:14:38.3694707Z,2025-11-21,2025-05-28,5
+dominik.ermler@kaiserkraft.com,Basic,account,2025-11-21T09:58:55.6098568Z,2025-05-28T09:14:38.3694707Z,2025-11-21,2025-05-28,6
 ernest.jonuzoski@axaptamasters.com,Visual Studio Enterprise subscription,msdn,2025-10-20T12:15:17.6092475Z,2025-05-28T11:50:23.8306318Z,2025-10-20,2025-05-28,37
 joachim.eschke@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-11T05:33:59.8171236Z,0001-01-01,2025-08-11,108
 eshan.jaysurya@encora.com,Basic,account,2025-11-12T17:31:01.6703732Z,2025-04-25T06:00:59.7997624Z,2025-11-12,2025-04-25,14
@@ -196,7 +196,7 @@ florian.fischer_extern@takkt.com,Stakeholder,account,2025-10-08T16:55:36.7027793
 lars.franz@takkt.com,Basic,account,2025-11-26T13:24:05.6792132Z,2025-02-05T09:16:38.7089616Z,2025-11-26,2025-02-05,0
 brian.freeman@takkt.com,Basic,account,0001-01-01T00:00:00Z,2025-07-31T06:22:37.9983619Z,0001-01-01,2025-07-31,119
 nico.frey@takkt.com,Stakeholder,account,2025-11-18T07:49:13.3477376Z,2025-07-24T11:38:53.5377871Z,2025-11-18,2025-07-24,9
-moritz.fricke@kaiserkraft.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-01T10:04:11.6098401Z,0001-01-01,2025-08-01,117
+moritz.fricke@kaiserkraft.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-01T10:04:11.6098401Z,0001-01-01,2025-08-01,118
 jan.friedel@takkt.com,Stakeholder,account,2025-10-29T08:33:23.0993968Z,2025-02-12T09:34:22.3853776Z,2025-10-29,2025-02-12,29
 stefanie.fronmaier@takkt.com,Basic,account,2025-11-26T11:43:29.3505812Z,2025-05-23T10:24:54.1764419Z,2025-11-26,2025-05-23,0
 doris.fruechtenicht@takkt.com,Stakeholder,account,2025-09-16T07:15:56.5056022Z,2025-06-16T06:14:17.692988Z,2025-09-16,2025-06-16,72
@@ -213,7 +213,7 @@ christiane.gaus@takkt.com,Basic,account,2025-11-27T07:25:06.897744Z,2025-04-23T1
 benjamin.gehrlach@takkt.com,Basic,account,2025-11-27T01:56:32.7661218Z,2021-07-06T12:28:22.6267236Z,2025-11-27,2021-07-06,0
 aron.gellen@takkt.com,Basic,account,2025-11-27T09:24:04.6368144Z,2025-11-24T09:38:49.0920165Z,2025-11-27,2025-11-24,0
 George.Hammerle@takktfoodservices.com,Visual Studio Professional subscription,msdn,2025-11-20T13:54:15.5424698Z,2025-04-25T05:55:19.4780238Z,2025-11-20,2025-04-25,6
-michael.giebner@takkt.com,Stakeholder,account,2025-10-29T09:53:35.9804901Z,2025-04-15T05:07:37.2584054Z,2025-10-29,2025-04-15,28
+michael.giebner@takkt.com,Stakeholder,account,2025-10-29T09:53:35.9804901Z,2025-04-15T05:07:37.2584054Z,2025-10-29,2025-04-15,29
 florian.goebel@takkt.com,Stakeholder,account,2025-10-20T10:54:48.6860915Z,2025-07-24T11:38:50.0001412Z,2025-10-20,2025-07-24,37
 selim.goekoez@takkt.com,Basic,account,2025-11-26T09:42:29.2152216Z,2025-10-30T11:15:13.2313563Z,2025-11-26,2025-10-30,1
 stephan.goll@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-07-24T11:38:47.5908763Z,0001-01-01,2025-07-24,125
@@ -254,15 +254,15 @@ sophie.hertenberger@takkt.com,Stakeholder,account,2025-08-21T06:44:22.3486723Z,2
 alexander.hezinger@takkt.com,Stakeholder,account,2025-06-23T11:39:55.9232115Z,2025-05-12T06:52:58.2219097Z,2025-06-23,2025-05-12,156
 daniela.hilfrich@takkt.com,Stakeholder,account,2025-10-09T12:05:00.7695711Z,2025-08-05T11:40:02.0105591Z,2025-10-09,2025-08-05,48
 thomas.hill_extern@takkt.com,Basic,account,2025-11-27T09:04:04.0561648Z,2025-07-25T13:58:38.0645794Z,2025-11-27,2025-07-25,0
-anne.hille@takkt.com,Basic,account,2025-11-26T15:28:43.3634186Z,2025-03-04T07:40:15.0404178Z,2025-11-26,2025-03-04,0
-franziska.hoffmann@kaiserkraft.com,Stakeholder,account,2025-11-21T09:56:52.2677496Z,2025-04-28T08:47:25.0219305Z,2025-11-21,2025-04-28,5
+anne.hille@takkt.com,Basic,account,2025-11-27T10:01:17.2532025Z,2025-03-04T07:40:15.0404178Z,2025-11-27,2025-03-04,0
+franziska.hoffmann@kaiserkraft.com,Stakeholder,account,2025-11-21T09:56:52.2677496Z,2025-04-28T08:47:25.0219305Z,2025-11-21,2025-04-28,6
 michael.hoffmann@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-07-01T11:14:33.127232Z,0001-01-01,2025-07-01,148
 jens.hofmann@takkt.com,Basic,account,2025-08-25T09:07:19.5381125Z,2025-02-17T09:13:32.2109337Z,2025-08-25,2025-02-17,94
 Holly.Patterson@takktfoodservices.com,Basic,account,2025-10-09T14:58:23.4920979Z,2025-04-24T12:55:51.8205855Z,2025-10-09,2025-04-24,48
 i-i.huang@takkt.com,Stakeholder,account,2025-10-15T05:51:23.7125217Z,2025-10-15T05:49:45.7179961Z,2025-10-15,2025-10-15,43
 julian.huber@takkt.com,Stakeholder,account,2025-11-26T15:00:33.1044467Z,2025-02-25T14:50:19.1609429Z,2025-11-26,2025-02-25,0
 hubertus.waltermann@ommax.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-08T09:23:14.7526047Z,0001-01-01,2025-08-08,111
-era.hunkeler@kaiserkraft.com,Stakeholder,account,2025-11-26T10:07:28.2567181Z,2025-08-04T13:16:20.3364058Z,2025-11-26,2025-08-04,0
+era.hunkeler@kaiserkraft.com,Stakeholder,account,2025-11-26T10:07:28.2567181Z,2025-08-04T13:16:20.3364058Z,2025-11-26,2025-08-04,1
 a.hunko@svitla.com,Stakeholder,account,2025-11-26T09:36:01.0852961Z,2025-02-14T09:07:55.0587077Z,2025-11-26,2025-02-14,1
 hueseyin.akdag_extern@kaiserkraft.com,Stakeholder,account,2023-05-10T14:59:22.2674283Z,2023-03-29T11:56:56.4959216Z,2023-05-10,2023-03-29,931
 ilaria.sabena@ommax.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-08T09:23:45.1915195Z,0001-01-01,2025-08-08,111
@@ -436,7 +436,7 @@ guruprashanth.nagarajappa_extern@takkt.com,Basic,account,0001-01-01T00:00:00Z,20
 ervin.nagy@takkt.com,Stakeholder,account,2025-11-27T08:39:26.3190471Z,2025-06-06T05:45:08.8479905Z,2025-11-27,2025-06-06,0
 shashi.narayanan_extern@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-10-27T12:10:26.0425651Z,0001-01-01,2025-10-27,30
 steffi.naumann@takkt.com,Basic,account,2025-11-25T11:55:45.6368274Z,2025-09-25T08:16:51.6926724Z,2025-11-25,2025-09-25,1
-naveenkrishna_su@infosys.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-22T09:50:17.158638Z,0001-01-01,2025-08-22,96
+naveenkrishna_su@infosys.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-08-22T09:50:17.158638Z,0001-01-01,2025-08-22,97
 tim.navrotskyy@takkt.com,Basic,account,2025-11-27T08:39:44.6305597Z,2023-02-03T12:13:41.2357073Z,2025-11-27,2023-02-03,0
 cosmin.neagu_extern@takkt.com,Stakeholder,account,2025-03-29T12:11:32.6132775Z,2025-02-18T15:50:30.4945056Z,2025-03-29,2025-02-18,242
 zoltan.nemeth@takkt.com,Stakeholder,account,2025-11-27T05:01:17.6335352Z,2025-10-18T20:05:06.4962618Z,2025-11-27,2025-10-18,0
@@ -445,7 +445,7 @@ marcel.neumann@kaiserkraft.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-05-
 anh.nguyen@takkt.com,Basic,account,2025-11-27T07:48:16.3532645Z,2023-08-31T07:57:25.9146619Z,2025-11-27,2023-08-31,0
 nick.powell@takktfoodservices.com,Basic,account,2025-07-23T12:58:06.7596347Z,2025-05-08T09:36:56.4654416Z,2025-07-23,2025-05-08,126
 Nick.Wallpe@takktfoodservices.com,Basic,account,2025-08-19T13:02:33.3009253Z,2025-05-08T09:36:54.224738Z,2025-08-19,2025-05-08,99
-eva.nickolaus@takkt.com,Stakeholder,account,2025-11-26T20:03:04.367259Z,2024-11-07T13:30:29.8330599Z,2025-11-26,2024-11-07,0
+eva.nickolaus@takkt.com,Stakeholder,account,2025-11-27T09:50:47.2367029Z,2024-11-07T13:30:29.8330599Z,2025-11-27,2024-11-07,0
 nikolett.jakubik@kaiserkraft.com,Stakeholder,account,2025-06-27T07:24:50.7662341Z,2025-06-26T08:52:07.7753825Z,2025-06-27,2025-06-26,153
 NilayC@nbf.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-10-18T21:02:10.1533608Z,0001-01-01,2025-10-18,39
 caroline.nill@takkt.com,Basic,account,2025-11-27T07:38:45.5603821Z,2024-10-09T06:51:00.2148203Z,2025-11-27,2024-10-09,0
@@ -465,7 +465,7 @@ jasmin.padutsch@takkt.com,Stakeholder,account,2025-06-26T08:37:08.1924663Z,2024-
 judit.pal@takkt.com,Basic,account,2025-11-27T08:22:07.2061043Z,2025-06-27T14:00:45.8532019Z,2025-11-27,2025-06-27,0
 leopoldo.paraliticci@takkt.com,Basic,account,2025-11-24T08:37:09.0603218Z,2025-09-05T14:48:54.2554053Z,2025-11-24,2025-09-05,3
 mikky.parmar_extern@takkt.com,Basic,account,0001-01-01T00:00:00Z,2025-10-29T09:42:38.084932Z,0001-01-01,2025-10-29,29
-eva.paros@takkt.com,Stakeholder,account,2025-11-25T09:55:28.4543234Z,2025-04-02T09:13:04.7659208Z,2025-11-25,2025-04-02,1
+eva.paros@takkt.com,Stakeholder,account,2025-11-25T09:55:28.4543234Z,2025-04-02T09:13:04.7659208Z,2025-11-25,2025-04-02,2
 Steven.Partlett@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-05-09T13:38:55.9311873Z,0001-01-01,2025-05-09,201
 patrick.puschner@arineo.com,Visual Studio Enterprise subscription,msdn,2025-09-17T09:04:51.2963455Z,2022-11-03T09:23:10.2731979Z,2025-09-17,2022-11-03,71
 Patti.Chesney@takktfoodservices.com,Basic,account,2025-06-30T13:18:37.0651492Z,2025-06-30T13:13:58.7680001Z,2025-06-30,2025-06-30,149
@@ -483,7 +483,7 @@ peter.hamos@guidevision.hu,Stakeholder,account,2025-11-20T14:20:02.0083722Z,2025
 anders.petersson@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-04-30T14:24:43.0349295Z,0001-01-01,2025-04-30,210
 petra.petsch@takkt.com,Stakeholder,account,2025-11-04T14:52:19.4193693Z,2025-03-31T08:22:06.4015051Z,2025-11-04,2025-03-31,22
 stefan.pfleger@takkt.com,Stakeholder,account,2025-11-27T05:13:16.0179996Z,2025-02-05T08:33:44.1482075Z,2025-11-27,2025-02-05,0
-philipp.kriebernegg@towa.at,Stakeholder,account,2025-07-31T09:54:44.5056378Z,2025-07-17T13:51:40.297018Z,2025-07-31,2025-07-17,118
+philipp.kriebernegg@towa.at,Stakeholder,account,2025-07-31T09:54:44.5056378Z,2025-07-17T13:51:40.297018Z,2025-07-31,2025-07-17,119
 julia.pieterwas@takkt.com,Basic,account,2025-11-27T09:09:01.2844267Z,2024-06-11T09:36:22.1544183Z,2025-11-27,2024-06-11,0
 gabor.piller@takkt.com,Basic,account,2025-10-22T07:43:23.5693325Z,2025-04-10T08:49:57.9740654Z,2025-10-22,2025-04-10,36
 sandro.podhorodeski@takkt.com,Visual Studio Professional subscription,msdn,2025-11-27T09:47:35.2429992Z,2019-09-03T13:06:01.4794401Z,2025-11-27,2019-09-03,0
@@ -537,16 +537,16 @@ dominik.rosenberger@takkt.com,Visual Studio Professional subscription,msdn,2025-
 pavel.rossinsky@takkt.com,Basic,account,2025-10-15T12:30:55.8788188Z,2025-09-01T14:00:42.7898005Z,2025-10-15,2025-09-01,42
 danielle.rothmann@takkt.com,Stakeholder,account,2025-09-29T13:39:51.9043184Z,2025-03-30T11:09:04.9148917Z,2025-09-29,2025-03-30,58
 indrajit.roy_extern@takkt.com,Stakeholder,account,2025-11-25T10:34:27.9576934Z,2025-11-17T09:23:42.4605531Z,2025-11-25,2025-11-17,1
-rsiebenhaar@hitachisolutions.com,Stakeholder,account,2024-11-22T10:05:58.3065565Z,2024-11-20T08:39:23.7398865Z,2024-11-22,2024-11-20,369
+rsiebenhaar@hitachisolutions.com,Stakeholder,account,2024-11-22T10:05:58.3065565Z,2024-11-20T08:39:23.7398865Z,2024-11-22,2024-11-20,370
 katarzyna.rubacha@takkt.com,Visual Studio Professional subscription,msdn,2025-11-26T15:39:24.8001824Z,2025-02-17T08:36:07.8244095Z,2025-11-26,2025-02-17,0
 david.ruiz@takkt.com,Stakeholder,account,2025-11-26T14:59:46.8375608Z,2025-04-25T09:07:42.8127555Z,2025-11-26,2025-04-25,0
 carsten.rumpf@takkt.com,Stakeholder,account,2025-11-26T15:15:59.0315097Z,2025-10-02T06:46:05.5483643Z,2025-11-26,2025-10-02,0
-alena.rupp@kaiserkraft.com,Stakeholder,account,2025-06-10T09:51:32.2347563Z,2025-02-21T13:38:09.8119588Z,2025-06-10,2025-02-21,169
+alena.rupp@kaiserkraft.com,Stakeholder,account,2025-06-10T09:51:32.2347563Z,2025-02-21T13:38:09.8119588Z,2025-06-10,2025-02-21,170
 hanns.ruesch@takkt.com,Basic,account,2025-11-27T07:29:13.9331164Z,2025-08-19T07:25:39.0239754Z,2025-11-27,2025-08-19,0
 simone.ruthof@takkt.com,Stakeholder,account,2025-11-19T14:40:35.2768453Z,2025-08-04T08:58:37.0838298Z,2025-11-19,2025-08-04,7
 uwe.rutsatz@kaiserkraft.com,Basic,account,2025-11-27T09:07:08.0469899Z,2023-04-06T10:07:55.2887937Z,2025-11-27,2023-04-06,0
 sarah.rybanska@takkt.com,Stakeholder,account,2025-10-01T11:13:07.7206624Z,2025-06-10T14:09:20.2429175Z,2025-10-01,2025-06-10,56
-chantal.ryhs@takkt.com,Stakeholder,account,2025-10-27T10:05:25.2898962Z,2024-11-12T09:04:23.9561999Z,2025-10-27,2024-11-12,30
+chantal.ryhs@takkt.com,Stakeholder,account,2025-10-27T10:05:25.2898962Z,2024-11-12T09:04:23.9561999Z,2025-10-27,2024-11-12,31
 s.2189259@infosys.com,Basic,account,2025-11-26T08:24:54.1007824Z,2025-06-10T12:38:06.8285427Z,2025-11-26,2025-06-10,1
 mike.saager@takkt.com,Stakeholder,account,2025-11-22T21:48:31.1060971Z,2025-05-13T08:24:34.7612602Z,2025-11-22,2025-05-13,4
 ulrike.sabel@kaiserkraft.com,Stakeholder,account,2025-11-26T11:41:53.114049Z,2025-09-17T10:41:03.4770543Z,2025-11-26,2025-09-17,0
@@ -575,7 +575,7 @@ robert.scheffel@takkt.com,Basic,account,2025-11-27T09:11:33.2896387Z,2025-03-28T
 yasmin.scheidecker@takkt.com,Stakeholder,account,2025-09-08T09:23:22.5464446Z,2025-04-08T08:04:50.3559924Z,2025-09-08,2025-04-08,80
 andreas.schirmer@kaiserkraft.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-10-27T10:39:54.3630885Z,0001-01-01,2025-10-27,30
 miriam.schmidt@kaiserkraft.com,Basic,account,2025-11-17T10:48:28.4012995Z,2025-11-05T10:57:13.7227407Z,2025-11-17,2025-11-05,9
-daniel.schmoock@takkt.com,Stakeholder,account,2025-08-13T10:00:53.4208783Z,2025-04-01T12:17:12.244195Z,2025-08-13,2025-04-01,105
+daniel.schmoock@takkt.com,Stakeholder,account,2025-08-13T10:00:53.4208783Z,2025-04-01T12:17:12.244195Z,2025-08-13,2025-04-01,106
 florian.schneider@takkt.com,Stakeholder,account,2025-11-25T12:34:04.7493928Z,2025-03-04T09:40:59.4997885Z,2025-11-25,2025-03-04,1
 david.scholz@takkt.com,Visual Studio Professional subscription,msdn,2025-11-21T16:42:24.2257331Z,2023-08-22T09:20:37.5854787Z,2025-11-21,2023-08-22,5
 katharina.schrake@kaiserkraft.com,Stakeholder,account,2025-11-26T08:32:21.0522186Z,2024-02-07T10:35:27.0429732Z,2025-11-26,2024-02-07,1
@@ -589,7 +589,7 @@ johannes.schwarz@takkt.com,Basic,account,2025-11-26T16:24:32.3919508Z,2022-10-07
 SM-SE-TIMEBOOKING-DE@takkt.com,Stakeholder,account,0001-01-01T00:00:00Z,2025-06-04T09:06:10.3439459Z,0001-01-01,2025-06-04,176
 seanp2@nbf.com,Visual Studio Enterprise subscription,msdn,2025-09-03T12:35:20.9136544Z,2025-06-10T13:11:20.0939142Z,2025-09-03,2025-06-10,84
 seema.saini@takktfoodservices.com,Basic,account,2025-11-25T18:35:48.7875673Z,2025-03-27T15:31:59.5715598Z,2025-11-25,2025-03-27,1
-norbert.seffer@takkt.com,Stakeholder,account,2025-11-26T10:01:17.8957847Z,2023-01-25T11:30:19.5327325Z,2025-11-26,2023-01-25,0
+norbert.seffer@takkt.com,Stakeholder,account,2025-11-26T10:01:17.8957847Z,2023-01-25T11:30:19.5327325Z,2025-11-26,2023-01-25,1
 susanne.seign@takkt.com,Stakeholder,account,2025-11-26T12:29:47.1606421Z,2025-08-05T11:50:47.1846176Z,2025-11-26,2025-08-05,0
 daniela.senkbeil@takkt.com,Basic,account,2025-11-26T07:29:54.6334776Z,2025-04-04T11:54:17.433165Z,2025-11-26,2025-04-04,1
 SVC-AX-DEVOPS@kaiserkraft-europa.de,Basic,account,2025-11-19T09:16:17.7865223Z,2019-07-04T15:30:29.8Z,2025-11-19,2019-07-04,8
@@ -669,7 +669,7 @@ tscherwen.adrian@kaiserkraft.com,Basic,account,2025-09-01T08:58:45.1051321Z,2025
 desislava.tsoneva@takkt.com,Basic,account,2025-11-26T08:54:11.5024238Z,2025-06-06T05:44:46.756722Z,2025-11-26,2025-06-06,1
 stefan.tuerk@takkt.com,Stakeholder,account,2025-10-14T07:50:18.0730034Z,2025-04-27T17:24:41.1340115Z,2025-10-14,2025-04-27,44
 ulrike.stamminger@dynamicon.de,Visual Studio Enterprise subscription,msdn,2025-10-14T11:32:13.4483082Z,2021-03-18T08:28:09.1590376Z,2025-10-14,2021-03-18,43
-michaela.unsoeld@takkt.com,Stakeholder,account,2025-11-26T10:03:55.1047126Z,2025-05-26T10:58:50.9783631Z,2025-11-26,2025-05-26,0
+michaela.unsoeld@takkt.com,Stakeholder,account,2025-11-26T10:03:55.1047126Z,2025-05-26T10:58:50.9783631Z,2025-11-26,2025-05-26,1
 miriama.valcova@takkt.com,Stakeholder,account,2025-11-24T06:33:24.5265357Z,2025-10-14T09:46:28.8956388Z,2025-11-24,2025-10-14,3
 shubh.vashisht@takkt.com,Stakeholder,account,2025-06-10T15:56:42.6067661Z,2025-06-10T15:56:39.2626041Z,2025-06-10,2025-06-10,169
 michael.veihl@takkt.com,Basic,account,2025-09-18T07:56:23.7688715Z,2025-09-17T09:11:48.1237148Z,2025-09-18,2025-09-17,70
@@ -714,4 +714,4 @@ maciej.zbikowski@takkt.com,Basic,account,2025-11-26T18:37:44.3996316Z,2024-08-14
 oliver.zinke@takkt.com,Stakeholder,account,2025-11-27T08:59:39.5377473Z,2025-02-05T09:18:31.014224Z,2025-11-27,2025-02-05,0
 marc.zipperlen@takkt.com,Basic,account,2025-11-26T14:54:21.0363619Z,2025-03-20T08:22:38.6871265Z,2025-11-26,2025-03-20,0
 fabian.zoebl@takkt.com,Stakeholder,account,2025-11-25T06:41:16.0827293Z,2025-06-30T18:43:46.1931164Z,2025-11-25,2025-06-30,2
-gyula.zsidi@takkt.com,Stakeholder,account,2025-11-26T09:51:06.4640161Z,2025-10-18T20:05:41.8955282Z,2025-11-26,2025-10-18,0
+gyula.zsidi@takkt.com,Stakeholder,account,2025-11-26T09:51:06.4640161Z,2025-10-18T20:05:41.8955282Z,2025-11-26,2025-10-18,1
