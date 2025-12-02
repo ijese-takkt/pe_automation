@@ -13,7 +13,7 @@ jobs:
     env:
       ADO_ORG: KKEU                   # Your Org Name
       ADO_PAT: ${{ secrets.ADO_PAT }} # Your Secret
-      EXECUTION_MODE: DEMOTE_ONE         # <--- Demote just the first (longest inactive) user
+      EXECUTION_MODE: DEMOTE_ONE      # <--- Demote just the first (longest inactive) user
       DEMOTE_THRESHOLD_DAYS: 90
 
     steps:
