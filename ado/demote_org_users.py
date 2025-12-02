@@ -4,6 +4,9 @@ import os
 import pandas as pd
 from datetime import datetime
 from pathlib import Path
+import json  # optional but handy if you want to pretty-print responses
+import base64
+
 
 # --- CONFIG ---
 ADO_ORG = os.getenv("ADO_ORG")
@@ -20,6 +23,15 @@ try:
 except ValueError:
     print(f"::error::Invalid DEMOTE_THRESHOLD_DAYS: {threshold_str}")
     exit(1)
+
+# --- AUTH / LICENSING ORG URL ---
+encoded_pat = base64.b64encode(f":{ADO_PAT}".encode()).decode()
+headers = {
+    'Authorization': f'Basic {encoded_pat}',
+    'Content-Type': 'application/json'
+}
+LICENSING_ORG_URL = f"https://vsaex.dev.azure.com/{ADO_ORG}"
+
 
 # --- LOAD CSV ---
 BASE_DIR = Path(__file__).resolve().parent
@@ -113,10 +125,66 @@ if EXECUTION_MODE == "DRY_RUN":
     cols_to_show = ['Email', 'Days Inactive', 'License', 'Last Login']
     print(candidates[cols_to_show].to_string(index=False))
 
+
 # --- MODE 2: DEMOTE ONE ---
 elif EXECUTION_MODE == "DEMOTE_ONE":
     print(f"::notice::[DEMOTE ONE] Processing the first candidate out of {candidate_count}...")
-    print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
+
+    # Take the most inactive candidate (df was already sorted when creating users_with_status.csv)
+    candidate = candidates.iloc[0]
+
+    entitlement_id = candidate.get('UserEntitlementId')
+    email = candidate.get('Email')
+    days_inactive = candidate.get('Days Inactive')
+    current_license = candidate.get('License')
+
+    if pd.isna(entitlement_id) or not str(entitlement_id).strip():
+        print(f"::error:: Candidate {email} has no UserEntitlementId in CSV. Aborting.")
+        exit(1)
+
+    print(f"::notice::Will demote user:")
+    print(f"  Email          : {email}")
+    print(f"  Entitlement ID : {entitlement_id}")
+    print(f"  Current license: {current_license}")
+    print(f"  Days inactive  : {days_inactive}")
+
+    url = f"{LICENSING_ORG_URL}/_apis/userentitlements/{entitlement_id}?api-version=7.1-preview.3"
+    headers = {
+        'Authorization': f'Basic {encoded_pat}',
+        'Content-Type': 'application/json-patch+json'
+    }
+    payload = [
+        {
+            "op": "replace",
+            "path": "/accessLevel",
+            "value": {
+                "accountLicenseType": "stakeholder"
+            }
+        }
+    ]
+
+    try:
+        resp = requests.patch(url, headers=headers, json=payload)
+    except Exception as e:
+        print(f"::error::HTTP error while calling ADO: {e}")
+        exit(1)
+
+    if resp.status_code not in (200, 201):
+        print(f"::error::Failed to demote user. Status: {resp.status_code}")
+        print(f"::error::Response: {resp.text}")
+        exit(1)
+
+    updated = resp.json()
+    new_license = (updated.get("accessLevel") or {}).get("licenseDisplayName", "Unknown")
+
+    print("::notice::User successfully demoted in ADO.")
+    print(f"  New license: {new_license}")
+
+    # Mark this user as demoted in the status CSV (so we don't try again)
+    df_status.loc[df_status['UserEntitlementId'] == entitlement_id, 'Demotion_Status'] = 'Demote DONE'
+    df_status.to_csv(output_csv, index=False)
+    print(f"::notice::Status CSV updated ({output_csv}).")
+
 
 # --- MODE 2: DEMOTE ALL ---
 elif EXECUTION_MODE == "DEMOTE_ALL":

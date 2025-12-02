@@ -83,6 +83,7 @@ for item in data.get('items', []):
     created_raw    = item.get("dateCreated")        # entitlement creation
 
     all_users.append({
+        'UserEntitlementId': item.get('id'),          # ← PATCH target
         'Email': email,
         'License': license_type,
         'Source': license_source,
@@ -108,6 +109,7 @@ csv_file = output_path / f"users_latest.csv"
 
 fieldnames = [
     "Email",
+    "UserEntitlementId",
     "License",
     "Source",
     "Last Login",
