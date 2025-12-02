@@ -1,0 +1,50 @@
+name: Demote ADO Users for KKEU (DRY RUN)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  demote-org-users_demote_one:
+    runs-on: ubuntu-latest
+
+    env:
+      ADO_ORG: KKEU                   # Your Org Name
+      ADO_PAT: ${{ secrets.ADO_PAT }} # Your Secret
+      EXECUTION_MODE: DEMOTE_ONE         # <--- Demote just the first (longest inactive) user
+      DEMOTE_THRESHOLD_DAYS: 90
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Demotion Script (Dry Run)
+        run: |
+          python ado/demote_org_users.py
+
+      - name: Commit Status CSV
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Add the outputs folder (where the CSVs live)
+          git add ado/outputs/
+          
+          # Commit (or skip if nothing changed)
+          git commit -m "action: demoted top inactive user in ${ADO_ORG}" || echo "::notice::No changes to commit"
+          git push
