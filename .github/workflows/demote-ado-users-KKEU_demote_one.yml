@@ -1,4 +1,4 @@
-name: Demote ADO Users for KKEU (DRY RUN)
+name: Demote ADO Users for KKEU (DEMOTE ONE)
 
 on:
   workflow_dispatch:
