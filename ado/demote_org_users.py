@@ -85,7 +85,40 @@ if need_analysis:
 
     print(f"::notice::Total users in CSV: {total}")
     print(f"::notice::Users flagged as demote candidates: {demote_count}")
-    print(f"::notice:: Output saved to: {output_csv}")
+    print(f"::notice::Output saved to: {output_csv}")
 
 #--- DEMOTE USERS ---
 print(f"::notice:: Execution mode for demotion: {EXECUTION_MODE}")
+
+# Reload CSV to get the latest sorted flags
+df_status = pd.read_csv(output_csv)
+candidates = df_status[df_status['Demotion_Status'] == 'Demote']
+candidate_count = len(candidates)
+
+if candidate_count == 0:
+    print("::notice::No candidates found marked for demotion.")
+    exit(0)
+
+# --- MODE 1: DRY RUN ---
+if EXECUTION_MODE == "DRY_RUN":
+    print(f"::notice::[DRY RUN] Found {candidate_count} candidates flaggd for demotion.")
+    print("::notice::No changes made. Below is the full list of impacted users:\n")
+    
+    # Configure Pandas to print the full list without truncation
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', 1000)
+    
+    # Print clean table
+    cols_to_show = ['Email', 'Days Inactive', 'License', 'Last Login']
+    print(candidates[cols_to_show].to_string(index=False))
+    
+# --- MODE 2: DEMOTE ALL ---
+elif EXECUTION_MODE == "DEMOTE_ALL":
+    print(f"::notice::[DEMOTE ALL] Found {candidate_count} candidates.")
+    print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
+
+# --- MODE 3: DEMOTE ONE ---
+elif EXECUTION_MODE == "DEMOTE_ONE":
+    print(f"::notice::[DEMOTE ONE] Processing the first candidate out of {candidate_count}...")
+    print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
