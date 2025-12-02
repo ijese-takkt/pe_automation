@@ -112,13 +112,13 @@ if EXECUTION_MODE == "DRY_RUN":
     # Print clean table
     cols_to_show = ['Email', 'Days Inactive', 'License', 'Last Login']
     print(candidates[cols_to_show].to_string(index=False))
-    
+
+# --- MODE 2: DEMOTE ONE ---
+elif EXECUTION_MODE == "DEMOTE_ONE":
+    print(f"::notice::[DEMOTE ONE] Processing the first candidate out of {candidate_count}...")
+    print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
+
 # --- MODE 2: DEMOTE ALL ---
 elif EXECUTION_MODE == "DEMOTE_ALL":
     print(f"::notice::[DEMOTE ALL] Found {candidate_count} candidates.")
-    print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
-
-# --- MODE 3: DEMOTE ONE ---
-elif EXECUTION_MODE == "DEMOTE_ONE":
-    print(f"::notice::[DEMOTE ONE] Processing the first candidate out of {candidate_count}...")
     print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
