@@ -1,4 +1,4 @@
-name: Catalogue ADO fields
+name: Catalogue KKEU fields
 
 on:
   workflow_dispatch:
