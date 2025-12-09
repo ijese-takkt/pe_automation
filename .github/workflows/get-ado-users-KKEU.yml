@@ -1,6 +1,8 @@
 name: Get ADO users for KKEU
 
 on:
+  schedule:
+    - cron: "*/5 * * * *"   # every night at 01:30 UTC
   workflow_dispatch:
 
 permissions:
