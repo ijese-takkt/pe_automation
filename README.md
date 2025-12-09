@@ -74,8 +74,16 @@ Scripts and jobs for **Platform Engineering** automation.
 
 ## TODO
 
-* document
-* demote all (manually)
-* set user extractor to trigger weekly for now
+Funtionality:
+* single log of who has been actually demoted, when and why
+* excel with 4 sheets (data, projects with count of custom fields, processes with count of projects, custom fields with count of projects)
+* project stats collector
+
+Other:
+* document all
 * keep last 5 invocations (logs, csvs) just timestamp them
-* 
+* proper logs for user extractor and demoting
+
+### Not yet
+
+* demote all (manually, later scheduled)
