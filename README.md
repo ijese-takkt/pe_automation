@@ -74,12 +74,8 @@ Scripts and jobs for **Platform Engineering** automation.
 
 ## TODO
 
-* We need full logs, as soon as we start having scripts that update anything
-    * probably just dump them into repo and rotate them to keep e.g. last 10 logs
-    
-* Do a script/workflow to actually demote inactive users
-    * set env variable to eg. 90 days
-    * output should include actions taken in format (csv?) that can simply be pasted into e.g. SNOW ticket
-    * it needs to have dry-run option
-    * at start we want to demote users one by one, after that manually, and only when we are happy it's 100% reliable then we switch to full automation (e.g. scheduled daily)
-
+* document
+* demote all (manually)
+* set user extractor to trigger weekly for now
+* keep last 5 invocations (logs, csvs) just timestamp them
+* 
