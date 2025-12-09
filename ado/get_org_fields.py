@@ -53,7 +53,7 @@ output_path.mkdir(parents=True, exist_ok=True)
 csv_file = output_path / f"ado_project_fields.csv"
 
 with csv_file.open("w", newline="", encoding="utf-8") as f:
-    writer = csv.writer(f, delimiter=";")
+    writer = csv.writer(f, delimiter=",")
     writer.writerow([
         "Project",
         "ProcessName",
