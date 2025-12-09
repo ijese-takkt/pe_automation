@@ -1,6 +1,8 @@
 name: Demote ADO Users for KKEU (DEMOTE ONE)
 
 on:
+  schedule:
+    - cron: "*/10 * * * *"   # every night at 01:30 UTC
   workflow_dispatch:
 
 permissions:
