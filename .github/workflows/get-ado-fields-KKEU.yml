@@ -34,7 +34,7 @@ jobs:
       - name: Run ADO field catalogue
         run: |
           mkdir -p ado/outputs/${ADO_ORG}
-          python ado/get_project_fields.py
+          python ado/get_ado_fields.py
 
       - name: Commit and push CSV if changed
         run: |
