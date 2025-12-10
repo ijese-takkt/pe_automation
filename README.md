@@ -343,15 +343,13 @@ A standard flow is:
 
 ## TODO
 
-Funtionality:
-* single log of who has been actually demoted, when and why
-* project stats collector
+Now:
+- single log of who has been actually demoted, when and why
+- project stats collector
 
-Other:
-* document all
-* keep last 5 invocations (logs, csvs) just timestamp them
-* proper logs for user extractor and demoting
+Next:
+- keep last 5 invocations (logs, csvs) just timestamp them
+- proper logs for user extractor and demoting
 
-### Not yet
-
-* demote all (manually, later scheduled)
+Later:
+- demote all (manually, later scheduled)
