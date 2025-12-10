@@ -10,14 +10,14 @@ Implemented so far:
 3. Get all fields for org KKEU
   - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
 
-## General
+## General Technical Stuff
 
 * Python **3.12**
 * Azure DevOps–related code lives under `ado/`
   * Any generated data goes under `ado/outputs/<ADO_ORG>/`
 
 
-## Local Development
+### Local Development
 
 * these are not in repo but you need them or equivalents to develop/test locally
 * you probably want to create venv then activate it to work from there
@@ -28,7 +28,7 @@ Implemented so far:
   (to avoid committing PATs in plaintext)
 
 
-## Secrets (GitHub)
+### Secrets (GitHub)
 
 * **`ADO_PAT`** (repository secret)
 
