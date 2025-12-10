@@ -171,6 +171,146 @@ Here’s the matching documentation section for your new script, in the same sty
   * All aggregations use simple pandas groupings (`groupby`, `nunique`).
 
 
+### `ado/demote_org_users.py`
+
+*(consumes `users_latest.csv` and updates licenses in ADO)*
+
+**Purpose:**
+Evaluate all users from the latest entitlement snapshot, flag those eligible for license demotion (e.g., Basic → Stakeholder), and optionally execute the demotion in Azure DevOps via JSON Patch.
+Supports three execution modes: **DRY_RUN**, **DEMOTE_ONE**, and **DEMOTE_ALL**.
+
+---
+
+### **Key steps:**
+
+1. **Load input dataset**
+
+   * Reads:
+
+     ```
+     outputs/<ADO_ORG>/users_latest.csv
+     ```
+   * This file is produced by the separate nightly scan script (`scan_org_users.py`).
+
+2. **Determine if re-analysis is needed**
+
+   * Compares timestamps of:
+
+     * `users_latest.csv` (input)
+     * `users_with_status.csv` (output)
+   * If input is newer → analysis must be re-run.
+   * (Note: timestamp quirks in CI environments may make this conservative.)
+
+3. **Analyze and flag users**
+
+   * Adds or updates a `Demotion_Status` column with:
+
+     * `""` (default)
+     * `"Demote"` (candidate)
+     * `"Demote DONE"` (after actual PATCH)
+   * A user is marked `"Demote"` if:
+
+     * License source is **account** (not MSDN)
+     * Current license is **not** already Stakeholder
+     * Inactivity ≥ configured threshold (`DEMOTE_THRESHOLD_DAYS`)
+   * Sorting is applied so the most inactive appear at the top.
+
+4. **Persist status dataset**
+
+   * Writes:
+
+     ```
+     outputs/<ORG>/users_with_status.csv
+     ```
+   * This serves as the definitive snapshot for the demotion step.
+
+
+### **Execution Modes**
+
+Controlled via environment variable:
+
+```
+EXECUTION_MODE = { DRY_RUN | DEMOTE_ONE | DEMOTE_ALL }
+```
+
+#### **DRY_RUN**
+
+* No changes sent to Azure DevOps.
+* Prints clean, full table of all candidates.
+* Safest mode and default.
+
+#### **DEMOTE_ONE**
+
+* Applies one license demotion only (the top candidate by inactivity).
+* Sends a JSON Patch request to:
+
+  ```
+  PATCH https://vsaex.dev.azure.com/<ORG>/_apis/userentitlements/<UserEntitlementId>?api-version=7.1-preview.3
+  ```
+* Payload (JSON Patch syntax):
+
+  ```json
+  [
+    {
+      "op": "replace",
+      "path": "/accessLevel",
+      "value": {
+        "accountLicenseType": "stakeholder",
+        "licensingSource": "account"
+      }
+    }
+  ]
+  ```
+* After success, marks the row as `"Demote DONE"` in the status CSV.
+
+#### **DEMOTE_ALL**
+
+* Intended to loop through all `"Demote"` rows and PATCH each user.
+* Currently locked as a safety mechanism until the flow is battle-tested.
+
+
+### **Output Files**
+
+**1. Input (read):**
+
+```
+outputs/<ADO_ORG>/users_latest.csv
+```
+
+**2. Output (written):**
+
+```
+outputs/<ADO_ORG>/users_with_status.csv
+```
+
+Includes columns:
+
+* `UserEntitlementId` ← used in PATCH URL
+* `Email`
+* `License`
+* `Source`
+* `Days Inactive`
+* `Demotion_Status` ( "", "Demote", "Demote DONE" )
+
+### **Developer Notes & Behavior**
+
+* Uses the **ADO Licensing API** (`vsaex.dev.azure.com`) — different domain than standard ADO REST.
+* All REST updates use **JSON Patch** (`application/json-patch+json`).
+* Safety-first design: nothing destructive happens unless explicitly switched to `DEMOTE_ONE` or `DEMOTE_ALL`.
+* CSV-driven architecture makes behavior transparent and traceable for audit or rollback.
+* Script is intended to be run after the nightly scan workflow (but can be run manually too).
+
+### **Typical usage in CI/CD**
+
+A standard flow is:
+
+1. **Nightly GitHub Action** runs `scan_users.py` → generates fresh `users_latest.csv`.
+2. **Manual or scheduled** job runs `demote_inactive_users.py` in:
+
+   * **DRY_RUN** first (report only)
+   * **DEMOTE_ONE** demote most inactive users one by one and check logs until happy all works fine
+   * **DEMOTE_ALL** later (once fully validated)
+
 ## TODO
 
 Funtionality:
