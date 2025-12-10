@@ -4,11 +4,11 @@ Scripts and jobs for **Platform Engineering** automation.
 
 Implemented so far:
 1. Get all users for org KKEU
-  - output is a csv, both viewable here and downloadable
+    - output is a csv, both viewable here and downloadable
 2. Demote org users to stakeholder, based on inactivity
-  - modes: DRY_RUN, DEMOTE_ONE (to be implemented: DEMOTE_ALL)
+    - modes: DRY_RUN, DEMOTE_ONE (to be implemented: DEMOTE_ALL)
 3. Get all fields for org KKEU
-  - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
+    - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
 
 ## General Technical Stuff
 
