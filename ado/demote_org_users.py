@@ -2,15 +2,16 @@ import requests
 import base64
 import os
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
-import json  # optional but handy if you want to pretty-print responses
-import base64
+import json 
 
 
 # --- CONFIG ---
 ADO_ORG = os.getenv("ADO_ORG")
 ADO_PAT = os.getenv("ADO_PAT")
+GITHUB_RUN_ID = os.getenv("GITHUB_RUN_ID","local")
+GITHUB_SHA = os.getenv("GITHUB_SHA","local")
 
 if not ADO_ORG or not ADO_PAT:
     print("::error:: Environment variables ADO_ORG_URL or ADO_PAT are missing.")
@@ -26,10 +27,6 @@ except ValueError:
 
 # --- AUTH / LICENSING ORG URL ---
 encoded_pat = base64.b64encode(f":{ADO_PAT}".encode()).decode()
-headers = {
-    'Authorization': f'Basic {encoded_pat}',
-    'Content-Type': 'application/json'
-}
 LICENSING_ORG_URL = f"https://vsaex.dev.azure.com/{ADO_ORG}"
 
 
@@ -40,9 +37,97 @@ output_dir = BASE_DIR / "outputs" / ADO_ORG
 input_csv = output_dir / "users_latest.csv"
 output_csv = output_dir / "users_with_status.csv"
 
+# --- LOGS ---
+demotions_log = output_dir / "demotions_APPEND_ONLY.log"
+demotions_csv = output_dir / "demotions.csv"
+
+
 if not input_csv.exists():
     print(f"::error:: Input CSV not found: {input_csv}")
     exit(1)
+
+
+def append_demotion_event(*, org, entitlement_id, email, old_license, new_license,
+                          days_inactive, threshold_days, source, mode,
+                          gh_run_id, gh_sha):
+    """
+    Append a single demotion event as line-delimited JSON to demotions.log.
+    """
+    ts = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    event = {
+        "ts": ts,
+        "org": org,
+        "userEntitlementId": str(entitlement_id),
+        "email": email,
+        "oldLicense": old_license,
+        "newLicense": new_license,
+        "daysInactive": int(days_inactive) if pd.notna(days_inactive) else None,
+        "thresholdDays": int(threshold_days),
+        "source": source,
+        "mode": mode,
+        "ghRunId": gh_run_id,
+        "ghSha": gh_sha,
+    }
+
+    demotions_log.parent.mkdir(parents=True, exist_ok=True)
+    with demotions_log.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(event, ensure_ascii=False) + "\n")
+
+
+def rebuild_demotions_csv():
+    """
+    Rebuild demotions.csv from demotions.log, sorted by newest first.
+    """
+    if not demotions_log.exists():
+        return
+
+    rows = []
+    with demotions_log.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError:
+                # ignore bad lines
+                continue
+
+    if not rows:
+        return
+
+    df_log = pd.DataFrame(rows)
+    # Map to human-facing columns
+    df_log["TimestampUtc"] = df_log["ts"]
+    df_log["Org"] = df_log.get("org", "")
+    df_log["Email"] = df_log.get("email", "")
+    df_log["UserEntitlementId"] = df_log.get("userEntitlementId", "")
+    df_log["OldLicense"] = df_log.get("oldLicense", "")
+    df_log["NewLicense"] = df_log.get("newLicense", "")
+    df_log["DaysInactive"] = df_log.get("daysInactive", "")
+    df_log["ThresholdDays"] = df_log.get("thresholdDays", "")
+    df_log["Source"] = df_log.get("source", "")
+    df_log["Mode"] = df_log.get("mode", "")
+    df_log["GitHubRunId"] = df_log.get("ghRunId", "")
+    df_log["CommitSha"] = df_log.get("ghSha", "")
+
+    cols = [
+        "TimestampUtc",
+        "Org",
+        "Email",
+        "UserEntitlementId",
+        "OldLicense",
+        "NewLicense",
+        "DaysInactive",
+        "ThresholdDays",
+        "Source",
+        "Mode",
+        "GitHubRunId",
+        "CommitSha",
+    ]
+
+    df_log = df_log.sort_values(by="TimestampUtc", ascending=False)
+    df_log[cols].to_csv(demotions_csv, index=False)
 
 
 # --- ANALYZE AND FLAG USERS FOR DEMOTION ---
@@ -128,6 +213,7 @@ elif EXECUTION_MODE == "DEMOTE_ONE":
     email = candidate.get('Email')
     days_inactive = candidate.get('Days Inactive')
     current_license = candidate.get('License')
+    source = candidate.get('Source', '')
 
     if pd.isna(entitlement_id) or not str(entitlement_id).strip():
         print(f"::error:: Candidate {email} has no UserEntitlementId in CSV. Aborting.")
@@ -171,7 +257,25 @@ elif EXECUTION_MODE == "DEMOTE_ONE":
     print("::notice::User successfully demoted in ADO.")
     print(f"  New license: {new_license}")
 
-    # Mark this user as demoted in the status CSV (so we don't try again)
+    # 1) Append to append-only demotions.log
+    append_demotion_event(
+        org=ADO_ORG,
+        entitlement_id=entitlement_id,
+        email=email,
+        old_license=current_license,
+        new_license=new_license,
+        days_inactive=days_inactive,
+        threshold_days=THRESHOLD_DAYS,
+        source=source,
+        mode=EXECUTION_MODE,
+        gh_run_id=GITHUB_RUN_ID,
+        gh_sha=GITHUB_SHA,
+    )
+
+    # 2) Rebuild demotions.csv for humans
+    rebuild_demotions_csv()
+
+    # 3) Mark this user as demoted in the status CSV (so we don't try again)
     df_status.loc[df_status['UserEntitlementId'] == entitlement_id, 'Demotion_Status'] = 'Demote DONE'
     df_status.to_csv(output_csv, index=False)
     print(f"::notice::Status CSV updated ({output_csv}).")
