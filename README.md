@@ -2,6 +2,13 @@
 
 Scripts and jobs for **Platform Engineering** automation.
 
+Implemented so far:
+1. Get all users for org KKEU
+  - output is a csv, both viewable here and downloadable
+2. Demote org users to stakeholder, based on inactivity
+  - modes: DRY_RUN, DEMOTE_ONE (to be implemented: DEMOTE_ALL)
+3. Get all fields for org KKEU
+  - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
 
 ## General
 
@@ -80,7 +87,7 @@ Here’s the matching docs block for your two demote workflows, same style as th
 ### `Demote ADO users for KKEU (DEMOTE ONE)`
 
 * Workflow file: `.github/workflows/demote-ado-users-KKEU_demote_one.yml`
-* Basically does the same as DRY_RUN version, plus:
+* Basically does the same as DRY_RUN version, but:
   * Sets `EXECUTION_MODE=DEMOTE_ONE`
   * Runs `ado/demote_org_users.py`
   * Commits and pushes `ado/outputs/` back to the repo so the status file reflects the changes.
