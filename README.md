@@ -11,7 +11,7 @@ Scripts and jobs for **Platform Engineering** automation.
     - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
 
 
-## TODO
+## Backlog / TODO
 
 1. Now:
     - single log of who has been actually demoted, when and why
