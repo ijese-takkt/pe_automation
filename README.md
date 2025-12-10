@@ -7,7 +7,7 @@ Scripts and jobs for **Platform Engineering** automation.
 
 * Python **3.12**
 * Azure DevOps–related code lives under `ado/`
-  * Any generated data goes under `ado/outputs/<ORG>/`
+  * Any generated data goes under `ado/outputs/<ADO_ORG>/`
 
 
 ## Local Development
