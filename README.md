@@ -10,11 +10,26 @@ Implemented so far:
 3. Get all fields for org KKEU
     - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
 
-## General Technical Stuff
+
+## TODO
+
+Now:
+- single log of who has been actually demoted, when and why
+- project stats collector
+
+Next:
+- keep last 5 invocations (logs, csvs) just timestamp them
+- proper logs for user extractor and demoting
+
+Later:
+- demote all (manually, later scheduled)
+
+## General Docs
 
 * Python **3.12**
 * Azure DevOps–related code lives under `ado/`
   * Any generated data goes under `ado/outputs/<ADO_ORG>/`
+* Each script and github action is documented below
 
 
 ### Local Development
@@ -340,16 +355,3 @@ A standard flow is:
    * **DRY_RUN** first (report only)
    * **DEMOTE_ONE** demote most inactive users one by one and check logs until happy all works fine
    * **DEMOTE_ALL** later (once fully validated)
-
-## TODO
-
-Now:
-- single log of who has been actually demoted, when and why
-- project stats collector
-
-Next:
-- keep last 5 invocations (logs, csvs) just timestamp them
-- proper logs for user extractor and demoting
-
-Later:
-- demote all (manually, later scheduled)
