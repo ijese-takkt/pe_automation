@@ -2,7 +2,7 @@
 
 Scripts and jobs for **Platform Engineering** automation.
 
-Implemented so far:
+## Implemented so far
 1. Get all users for org KKEU
     - output is a csv, both viewable here and downloadable
 2. Demote org users to stakeholder, based on inactivity
@@ -13,16 +13,14 @@ Implemented so far:
 
 ## TODO
 
-Now:
-- single log of who has been actually demoted, when and why
-- project stats collector
-
-Next:
-- keep last 5 invocations (logs, csvs) just timestamp them
-- proper logs for user extractor and demoting
-
-Later:
-- demote all (manually, later scheduled)
+1. Now:
+    - single log of who has been actually demoted, when and why
+    - project stats collector
+2. Next:
+    - keep last 5 invocations (logs, csvs) just timestamp them
+    - proper logs for user extractor and demoting
+3. Later:
+    - demote all (manually, later scheduled)
 
 ## General Docs
 
