@@ -74,9 +74,6 @@ Scripts and jobs for **Platform Engineering** automation.
   - filter the first sheet with original data
   - review other sheets containing aggregate reports
 
-Here’s the matching docs block for your two demote workflows, same style as the ones you already have.
-
-
 ### `Demote ADO users for KKEU (DRY RUN)`
 
 * Workflow file: `.github/workflows/demote-ado-users-KKEU_dry_run.yml`
