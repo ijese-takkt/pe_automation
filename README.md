@@ -18,7 +18,7 @@ Scripts and jobs for **Platform Engineering** automation.
     - project stats collector
 2. Next:
     - keep last 5 invocations (logs, csvs) just timestamp them
-    - proper logs for user extractor and demoting
+    - full logs for user extractor and demoting
 3. Later:
     - demote all (manually, later scheduled)
 
