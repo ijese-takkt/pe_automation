@@ -2,7 +2,7 @@
 
 Scripts and jobs for **Platform Engineering** automation.
 
-## Implemented so far
+### Implemented so far
 1. Get all users for org KKEU
     - output is a csv, both viewable here and downloadable
 2. Demote org users to stakeholder, based on inactivity
@@ -11,7 +11,7 @@ Scripts and jobs for **Platform Engineering** automation.
     - output is a csv viewable here, plus xlsx (downloadable) with additional aggregate reports
 
 
-## Backlog / TODO
+### Backlog / TODO
 
 1. Now:
     - single log of who has been actually demoted, when and why
