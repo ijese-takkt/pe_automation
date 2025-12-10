@@ -86,9 +86,6 @@ Scripts and jobs for **Platform Engineering** automation.
 
 Here’s the matching documentation section for your new script, in the same style and level of detail—clean, practical, and focusing on what matters.
 
----
-
-## Scripts
 
 ### `ado/get_org_fields.py`
 
@@ -178,7 +175,6 @@ Here’s the matching documentation section for your new script, in the same sty
 
 Funtionality:
 * single log of who has been actually demoted, when and why
-* excel with 4 sheets (data, projects with count of custom fields, processes with count of projects, custom fields with count of projects)
 * project stats collector
 
 Other:
