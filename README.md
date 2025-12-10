@@ -308,19 +308,10 @@ EXECUTION_MODE = { DRY_RUN | DEMOTE_ONE | DEMOTE_ALL }
 * Currently locked as a safety mechanism until the flow is battle-tested.
 
 
-### **Output Files**
+### **Input/Output Files**
 
-**1. Input (read):**
-
-```
-outputs/<ADO_ORG>/users_latest.csv
-```
-
-**2. Output (written):**
-
-```
-outputs/<ADO_ORG>/users_with_status.csv
-```
+- Input (read): ```outputs/<ADO_ORG>/users_latest.csv```
+- Output (written): ```outputs/<ADO_ORG>/users_with_status.csv```
 
 Includes columns:
 
