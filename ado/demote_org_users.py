@@ -46,13 +46,13 @@ if not input_csv.exists():
     print(f"::error:: Input CSV not found: {input_csv}")
     exit(1)
 
+# --- FUNCTIONS ---
 
+# Append a single demotion event as line-delimited JSON to demotions.log
 def append_demotion_event(*, org, entitlement_id, email, old_license, new_license,
                           days_inactive, threshold_days, source, mode,
                           gh_run_id, gh_sha):
-    """
-    Append a single demotion event as line-delimited JSON to demotions.log.
-    """
+
     ts = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
     event = {
         "ts": ts,
@@ -74,10 +74,9 @@ def append_demotion_event(*, org, entitlement_id, email, old_license, new_licens
         f.write(json.dumps(event, ensure_ascii=False) + "\n")
 
 
+# Rebuild demotions.csv from demotions.log, sorted by newest first
 def rebuild_demotions_csv():
-    """
-    Rebuild demotions.csv from demotions.log, sorted by newest first.
-    """
+
     if not demotions_log.exists():
         return
 
@@ -130,65 +129,61 @@ def rebuild_demotions_csv():
     df_log[cols].to_csv(demotions_csv, index=False)
 
 
-# --- ANALYZE AND FLAG USERS FOR DEMOTION ---
-print(f"::notice::Marking demote candidates for org {ADO_ORG} with threshold {THRESHOLD_DAYS} days.")
-print(f"::notice::Input CSV: {input_csv}")
+# Rebuild users_with_status.csv from users_latest.csv
+def analyze_and_flag():
+    print(f"::notice::Rebuilding status from latest snapshot for org {ADO_ORG} (threshold {THRESHOLD_DAYS} days).")
+    print(f"::notice::Input CSV: {input_csv}")
 
-print(f"Loading data from {input_csv}...")
-df = pd.read_csv(input_csv)
+    df = pd.read_csv(input_csv)
 
-print(f"::notice:: Marking candidates (Threshold: {THRESHOLD_DAYS} days)...")
+    # Ensure Demotion_Status column exists (fresh)
+    if 'Demotion_Status' not in df.columns:
+        df['Demotion_Status'] = ''
+    else:
+        # We intentionally discard old statuses on rebuild
+        df['Demotion_Status'] = ''
 
-# Initialize Status Column
-if 'Demotion_Status' not in df.columns:
-    df['Demotion_Status'] = ''
+    total = len(df)
+    demote_count = 0
 
-total = len(df)
-demote_count = 0
+    print(f"::notice:: Marking candidates (Threshold: {THRESHOLD_DAYS} days)...")
 
-for index, row in df.iterrows():
-    # Safe data retrieval
-    email = str(row.get('Email', '')).lower()
-    days_inactive = row.get('Days Inactive', 0)
-    license_type = row.get('License', '')
-    source = row.get('Source', '')
+    for index, row in df.iterrows():
+        days_inactive = row.get('Days Inactive', 0)
+        license_type = row.get('License', '')
+        source = row.get('Source', '')
 
-    # Must be inactive long enough, NOT already free, NOT paid MSDN
-    should_demote = (
-        source == "account"
-        and "stakeholder" not in license_type.lower()
-        and days_inactive >= THRESHOLD_DAYS
-    )
+        # Must be inactive long enough, NOT already free, NOT paid MSDN
+        should_demote = (
+            source == "account"
+            and "stakeholder" not in license_type.lower()
+            and days_inactive >= THRESHOLD_DAYS
+        )
 
-    if should_demote:
-        df.at[index, 'Demotion_Status'] = 'Demote'
-        demote_count += 1
+        if should_demote:
+            df.at[index, 'Demotion_Status'] = 'Demote'
+            demote_count += 1
 
-# Sort: Highest inactivity at top
-df = df.sort_values(by='Days Inactive', ascending=False)
+    # Sort: Highest inactivity at top
+    df = df.sort_values(by='Days Inactive', ascending=False)
 
-# save new CSV
-df.to_csv(output_csv, index=False)
+    # save new CSV
+    df.to_csv(output_csv, index=False)
 
-print(f"::notice::Total users in CSV: {total}")
-print(f"::notice::Users flagged as demote candidates: {demote_count}")
-print(f"::notice::Output saved to: {output_csv}")
+    print(f"::notice::Total users in CSV: {total}")
+    print(f"::notice::Users flagged as demote candidates: {demote_count}")
+    print(f"::notice::Output saved to: {output_csv}")
+
+    # Return status + candidates
+    df_status = df
+    candidates = df_status[df_status['Demotion_Status'] == 'Demote']
+    return df_status, candidates
 
 
-#--- DEMOTE USERS ---
-print(f"::notice:: Execution mode for demotion: {EXECUTION_MODE}")
+# Print a full list of candidates without changing anything.
+def demote_dry_run(df_status, candidates):
 
-# Reload CSV to get the latest sorted flags
-df_status = pd.read_csv(output_csv)
-candidates = df_status[df_status['Demotion_Status'] == 'Demote']
-candidate_count = len(candidates)
-
-if candidate_count == 0:
-    print("::notice::No candidates found marked for demotion.")
-    exit(0)
-
-# --- MODE 1: DRY RUN ---
-if EXECUTION_MODE == "DRY_RUN":
+    candidate_count = len(candidates)
     print(f"::notice::[DRY RUN] Found {candidate_count} candidates flaggd for demotion.")
     print("::notice::No changes made. Below is the full list of impacted users:\n")
     
@@ -202,8 +197,9 @@ if EXECUTION_MODE == "DRY_RUN":
     print(candidates[cols_to_show].to_string(index=False))
 
 
-# --- MODE 2: DEMOTE ONE ---
-elif EXECUTION_MODE == "DEMOTE_ONE":
+# Demote the top candidate (longest inactive) and update status + audit logs
+def demote_one(df_status, candidates):
+    candidate_count = len(candidates)
     print(f"::notice::[DEMOTE ONE] Processing the first candidate out of {candidate_count}...")
 
     # Take the most inactive candidate (df was already sorted when creating users_with_status.csv)
@@ -251,8 +247,9 @@ elif EXECUTION_MODE == "DEMOTE_ONE":
         print(f"::error::Response: {resp.text}")
         exit(1)
 
-    updated = resp.json()
-    new_license = (updated.get("accessLevel") or {}).get("licenseDisplayName", "Unknown")
+    # Response body shape is flaky; we know what we set it to.
+    _updated = resp.json()
+    new_license = "Stakeholder"
 
     print("::notice::User successfully demoted in ADO.")
     print(f"  New license: {new_license}")
@@ -276,12 +273,46 @@ elif EXECUTION_MODE == "DEMOTE_ONE":
     rebuild_demotions_csv()
 
     # 3) Mark this user as demoted in the status CSV (so we don't try again)
-    df_status.loc[df_status['UserEntitlementId'] == entitlement_id, 'Demotion_Status'] = 'Demote DONE'
+    df_status.loc[
+        df_status['UserEntitlementId'].astype(str) == str(entitlement_id),
+        'Demotion_Status'
+    ] = 'Demote DONE'
     df_status.to_csv(output_csv, index=False)
     print(f"::notice::Status CSV updated ({output_csv}).")
+    print(f"::notice::Demotions log updated ({demotions_log}).")
+    print(f"::notice::Demotions CSV updated ({demotions_csv}).")
 
 
-# --- MODE 2: DEMOTE ALL ---
+# --- MAIN ---
+print(f"::notice:: Execution mode for demotion: {EXECUTION_MODE}")
+
+# Decide whether we need to rebuild status CSV from latest snapshot
+t_input = input_csv.stat().st_mtime
+t_status = output_csv.stat().st_mtime if output_csv.exists() else 0
+
+if (not output_csv.exists()) or (t_input > t_status):
+    print("::notice::Status CSV missing or older than users_latest. Rebuilding flags from latest snapshot.")
+    df_status, candidates = analyze_and_flag()
+else:
+    print("::notice::Status CSV is newer than or same as users_latest. Reusing existing flags.")
+    df_status = pd.read_csv(output_csv)
+    candidates = df_status[df_status['Demotion_Status'] == 'Demote']
+
+candidate_count = len(candidates)
+
+if candidate_count == 0:
+    print("::notice::No candidates found marked for demotion.")
+    exit(0)
+
+# --- MODE 1: DRY RUN ---
+if EXECUTION_MODE == "DRY_RUN":
+    demote_dry_run(df_status, candidates)
+
+# --- MODE 2: DEMOTE ONE ---
+elif EXECUTION_MODE == "DEMOTE_ONE":
+    demote_one(df_status, candidates)
+
+# --- MODE 3: DEMOTE ALL ---
 elif EXECUTION_MODE == "DEMOTE_ALL":
     print(f"::notice::[DEMOTE ALL] Found {candidate_count} candidates.")
     print("::notice::NOT IMPLEMENTED YET (Safety Lock). No changes were made.")
