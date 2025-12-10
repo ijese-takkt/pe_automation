@@ -108,33 +108,23 @@ Scripts and jobs for **Platform Engineering** automation.
 ### `ado/get_org_users.py`
 
 * Uses **REST `userentitlements`** instead of Graph:
-
   * Entitlements (licensed users) vs raw identities
   * Docs:
-
     * [https://developercommunity.visualstudio.com/t/what-is-the-different-between-get-user-entitlement/1080296](https://developercommunity.visualstudio.com/t/what-is-the-different-between-get-user-entitlement/1080296)
     * [https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/search-user-entitlements](https://learn.microsoft.com/en-us/rest/api/azure/devops/memberentitlementmanagement/user-entitlements/search-user-entitlements)
 * Important rules:
-
   * `licensingSource = "msdn"` **should NOT be downgraded** by automation
   * We only consider `licensingSource = "account"` (and later possibly `auto` / `trial`) for demotions
 * API quirk:
-
   * `continuationToken` is often `''` even when `totalCount` > page size
   * Workaround: use `?top=30000` to get all entitlements in one call
 * Output:
-
   * Creates CSV with:
-
     * `Email`, `License`, `Source`, `Last Login`, `Created`, `Last Login Date`, `Created Date`, `Days Inactive`
   * Path: `ado/outputs/<ORG>/users_latest.csv`
-
     * For `KKEU`: `ado/outputs/KKEU/users_latest.csv`
   * Days Inactive: is calculated from Last Login OR Created (whichever is newer) to today
     * This is because if user never logged in then Last Login is 01-01-0001
-
-Here’s the matching documentation section for your new script, in the same style and level of detail—clean, practical, and focusing on what matters.
-
 
 ### `ado/get_org_fields.py`
 
@@ -154,9 +144,7 @@ Here’s the matching documentation section for your new script, in the same sty
   * Combine with org-level metadata to produce a flat dataset.
 
 * **Output (CSV):**
-
   * Creates a normalized table with one row per `(Project, Field)`:
-
     * `Project`
     * `ProcessName`
     * `FieldName`
@@ -165,56 +153,40 @@ Here’s the matching documentation section for your new script, in the same sty
     * `IsIdentity`
     * `IsCustom` (derived from `FieldRefName.startswith("Custom.")`)
   * Path:
-
     ```
     output/<ORG>/ado_project_fields.csv
     ```
-
     Example:
-
     ```
     output/KKEU/ado_project_fields.csv
     ```
-
 * **Output (Excel workbook):**
   After CSV is generated (or using existing CSV if `SKIP_CSV=1` is set), the script builds:
-
   `ado_project_fields.xlsx` with **four sheets**:
-
   1. **`data`**
      Raw rows copied from the CSV.
-
   2. **`projects_custom_fields`**
-
      * For each project: number of **distinct custom fields** used.
      * Helps identify over-customized projects.
-
   3. **`process_projects`**
-
      * For each process template: number of projects using it.
      * Highlights unused or rarely used processes.
-
   4. **`fields_project_counts`**
-
      * For each custom field: number of projects referencing it.
-
      * Identifies highly reused fields vs. one-off “snowflake” fields.
 
   * Path:
-
     ```
     outputs/<ADO_ORG>/ado_project_fields.xlsx
     ```
 
 * **Developer conveniences:**
-
   * Script supports skipping CSV generation (useful during development) 
     - via BUILD_CSV flag (hardcoded for now, just change it directly when testing)
     - in this mode, only the Excel workbook is rebuilt.
   * CSV writing and Excel writing are separated into functions for clarity.
 
 * **Notes:**
-
   * No external references or pagination complexities — ADO’s WIT/fields endpoints return everything in one call.
   * ADO process information is fetched per-project; there is no bulk endpoint.
   * All aggregations use simple pandas groupings (`groupby`, `nunique`).
@@ -227,7 +199,6 @@ Here’s the matching documentation section for your new script, in the same sty
 **Purpose:**
 Evaluate all users from the latest entitlement snapshot, flag those eligible for license demotion (e.g., Basic → Stakeholder), and optionally execute the demotion in Azure DevOps via JSON Patch.
 Supports three execution modes: **DRY_RUN**, **DEMOTE_ONE**, and **DEMOTE_ALL**.
-
 
 
 ### **Key steps:**
