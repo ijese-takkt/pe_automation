@@ -334,8 +334,8 @@ Includes columns:
 
 A standard flow is:
 
-1. **Nightly GitHub Action** runs `scan_users.py` → generates fresh `users_latest.csv`.
-2. **Manual or scheduled** job runs `demote_inactive_users.py` in:
+1. **Nightly GitHub Action** runs `get_org_users.py` → generates fresh `users_latest.csv`.
+2. **Manual or scheduled** job runs `demote_org_users.py` in:
 
    * **DRY_RUN** first (report only)
    * **DEMOTE_ONE** demote most inactive users one by one and check logs until happy all works fine
