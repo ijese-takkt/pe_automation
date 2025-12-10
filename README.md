@@ -14,7 +14,6 @@ Scripts and jobs for **Platform Engineering** automation.
 ### Backlog / TODO
 
 1. Now:
-    - single log of who has been actually demoted, when and why
     - project stats collector
 2. Next:
     - keep last 5 invocations (logs, csvs) just timestamp them
