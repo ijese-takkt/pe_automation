@@ -54,6 +54,38 @@ Scripts and jobs for **Platform Engineering** automation.
   - filter the first sheet with original data
   - review other sheets containing aggregate reports
 
+Here’s the matching docs block for your two demote workflows, same style as the ones you already have.
+
+
+### `Demote ADO users for KKEU (DRY RUN)`
+
+* Workflow file: `.github/workflows/demote-ado-users-KKEU_dry_run.yml`
+* Sets:
+
+  * `ADO_ORG=KKEU`
+  * `EXECUTION_MODE=DRY_RUN`
+  * `DEMOTE_THRESHOLD_DAYS=90`
+* Requires `ado/outputs/KKEU/users_latest.csv`
+  (normally produced by `Get ADO users for KKEU`)
+* Runs `ado/demote_org_users.py` to:
+
+  * load `users_latest.csv`
+  * mark candidates with `Demotion_Status="Demote"` based on inactivity and license rules
+  * write `ado/outputs/KKEU/users_with_status.csv`
+* Commits and pushes `ado/outputs/` back to the repo
+  (so `users_with_status.csv` is visible and reviewable in GitHub)
+* Does **not** change anything in Azure DevOps – purely reporting / planning step.
+
+
+### `Demote ADO users for KKEU (DEMOTE ONE)`
+
+* Workflow file: `.github/workflows/demote-ado-users-KKEU_demote_one.yml`
+* Basically does the same as DRY_RUN version, plus:
+  * Sets `EXECUTION_MODE=DEMOTE_ONE`
+  * Runs `ado/demote_org_users.py`
+  * Commits and pushes `ado/outputs/` back to the repo so the status file reflects the changes.
+* Intended as a **safe, incremental** way to exercise real demotion logic on one user at a time before enabling bulk demotion.
+
 ## Scripts
 
 ### `ado/get_org_users.py`
@@ -179,7 +211,7 @@ Here’s the matching documentation section for your new script, in the same sty
 Evaluate all users from the latest entitlement snapshot, flag those eligible for license demotion (e.g., Basic → Stakeholder), and optionally execute the demotion in Azure DevOps via JSON Patch.
 Supports three execution modes: **DRY_RUN**, **DEMOTE_ONE**, and **DEMOTE_ALL**.
 
----
+
 
 ### **Key steps:**
 
